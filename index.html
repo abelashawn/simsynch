@@ -95,10 +95,19 @@ h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-he
 .ios-strip-note{grid-column:1/-1;font-size:11px;color:var(--slate2);margin-top:2px}
 
 /* ── REAL APP SCREENSHOTS (uncropped, full width) ── */
-.app-screenshot{border:1px solid var(--border2);overflow:hidden;background:#0D1117}
-.app-screenshot + .app-screenshot{margin-top:16px}
-.app-screenshot img{width:100%;height:auto;display:block}
-.app-screenshot-cap{padding:10px 14px;background:#12161D;font-size:11px;color:var(--slate2);border-top:1px solid var(--border)}
+.screens-gallery{max-width:1200px;margin:56px auto 0;padding:0 40px}
+.screens-gallery-label{font-size:11px;font-weight:600;color:var(--slate2);letter-spacing:.04em;margin-bottom:16px}
+.screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.screen-thumb{all:unset;cursor:zoom-in;display:block;border:1px solid var(--border2);background:#0D1117;overflow:hidden;transition:border-color .15s}
+.screen-thumb:hover{border-color:var(--amber)}
+.screen-thumb img{width:100%;height:150px;object-fit:cover;object-position:top;display:block}
+.screen-thumb-cap{display:block;padding:10px 12px;font-size:11px;color:var(--slate2);line-height:1.4;border-top:1px solid var(--border)}
+
+/* ── LIGHTBOX ── */
+.lightbox{position:fixed;inset:0;background:rgba(6,8,12,.94);z-index:1000;display:none;align-items:center;justify-content:center;padding:40px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;object-fit:contain;border:1px solid var(--border2)}
+.lightbox-close{position:absolute;top:24px;right:32px;color:var(--muted);font-size:14px;font-weight:600;letter-spacing:.04em}
 
 /* ── SESSION PHOTO (real photo used inside workflow) ── */
 .session-photo{border:1px solid var(--border2);overflow:hidden}
@@ -211,6 +220,7 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
 /* ── RESPONSIVE ── */
 @media(max-width:900px){
   .workflow{grid-template-columns:1fr}
+  .screens-grid{grid-template-columns:1fr}
   .features{grid-template-columns:1fr}
   .compliance-inner{grid-template-columns:1fr}
   .intro-strip-inner{grid-template-columns:1fr}
@@ -396,34 +406,33 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
       </div>
     </div>
 
-    <!-- UI snippet mockup -->
+    <!-- Ambient photo alongside the steps -->
     <div>
       <!-- Real photo: instructor's view during a live session -->
-      <div class="session-photo" style="margin-bottom:16px">
+      <div class="session-photo">
         <img src="images/session-ios.jpg" alt="Instructor operating station and cockpit view during a live A320 simulator session">
         <div class="session-photo-cap">IOS view during a live session — dual screens, cockpit ahead</div>
       </div>
-
-      <!-- Real screenshot: ORC — upload & live grading -->
-      <div class="app-screenshot">
-        <img src="images/app-orca-upload.jpg" alt="SimSynch OPC & ORCA Workflow tab showing live exercise grading, workflow steps, and grading progress">
-        <div class="app-screenshot-cap">OPC &amp; ORCA Workflow — upload a program, then grade each behaviour live against the OPC workflow steps</div>
-      </div>
-
-      <!-- Real screenshot: DBF — debrief and graded record -->
-      <div class="app-screenshot">
-        <img src="images/app-debrief.jpg" alt="SimSynch Session Debrief tab showing competency radar, session result, and the full graded observable behaviour record">
-        <div class="app-screenshot-cap">Session Debrief — competency radar, overall result, focus areas, and the full graded OB record beneath it</div>
-      </div>
-
-      <!-- Real screenshot: DBF continued — full graded record -->
-      <div class="app-screenshot">
-        <img src="images/app-orca-detail.jpg" alt="SimSynch debrief record continued, showing further graded observable behaviours and the next exercise">
-        <div class="app-screenshot-cap">Every observed behaviour stays attached to its exercise and phase — nothing is summarised away before the debrief</div>
-      </div>
     </div>
   </div>
-</section>
+
+  <!-- Real app screenshots — full width, click to enlarge -->
+  <div class="screens-gallery">
+    <div class="screens-gallery-label">SimSynch™ in the sim — click any screen to zoom in</div>
+    <div class="screens-grid">
+      <button class="screen-thumb" onclick="openLightbox('images/app-orca-upload.jpg')">
+        <img src="images/app-orca-upload.jpg" alt="SimSynch OPC & ORCA Workflow tab showing live exercise grading, workflow steps, and grading progress">
+        <span class="screen-thumb-cap">OPC &amp; ORCA Workflow — upload a program, then grade each behaviour live</span>
+      </button>
+      <button class="screen-thumb" onclick="openLightbox('images/app-debrief.jpg')">
+        <img src="images/app-debrief.jpg" alt="SimSynch Session Debrief tab showing competency radar, session result, and the full graded observable behaviour record">
+        <span class="screen-thumb-cap">Session Debrief — competency radar, overall result, focus areas, full graded record</span>
+      </button>
+      <button class="screen-thumb" onclick="openLightbox('images/app-orca-detail.jpg')">
+        <img src="images/app-orca-detail.jpg" alt="SimSynch debrief record continued, showing further graded observable behaviours and the next exercise">
+        <span class="screen-thumb-cap">Every OB stays attached to its exercise and phase — nothing summarised away</span>
+      </button>
+    </div>
   </div>
 </section>
 
@@ -628,6 +637,22 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
     © 2026 KM Malta Airlines. All rights reserved.
   </div>
 </footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <span class="lightbox-close">CLOSE ✕</span>
+  <img id="lightbox-img" src="" alt="Enlarged screenshot">
+</div>
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeLightbox(); });
+</script>
 
 </body>
 </html>
