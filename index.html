@@ -79,9 +79,9 @@ h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-he
 
 /* ── FACILITY (real photo strip) ── */
 .facility{background:var(--ink);border-bottom:1px solid var(--border)}
-.facility-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch}
+.facility-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1.15fr 1fr;gap:0;align-items:stretch}
 .facility-text{padding:80px 40px 80px 0;display:flex;flex-direction:column;justify-content:center}
-.facility-photo{position:relative;min-height:420px}
+.facility-photo{position:relative;height:380px;overflow:hidden}
 .facility-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .facility-photo-cap{position:absolute;left:24px;bottom:20px;font-size:11px;color:#94A3B8;letter-spacing:.02em;background:rgba(11,14,20,.72);padding:6px 10px;border-radius:3px}
 .facility-thumb{margin-top:16px;border-radius:0;overflow:hidden;border-top:1px solid var(--border)}
@@ -93,6 +93,12 @@ h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-he
 .ios-strip img{width:100%;height:130px;object-fit:cover;display:block}
 .ios-strip figcaption{font-size:10px;color:var(--slate2);padding:8px 10px;line-height:1.4}
 .ios-strip-note{grid-column:1/-1;font-size:11px;color:var(--slate2);margin-top:2px}
+
+/* ── REAL APP SCREENSHOTS (uncropped, full width) ── */
+.app-screenshot{border:1px solid var(--border2);overflow:hidden;background:#0D1117}
+.app-screenshot + .app-screenshot{margin-top:16px}
+.app-screenshot img{width:100%;height:auto;display:block}
+.app-screenshot-cap{padding:10px 14px;background:#12161D;font-size:11px;color:var(--slate2);border-top:1px solid var(--border)}
 
 /* ── SESSION PHOTO (real photo used inside workflow) ── */
 .session-photo{border:1px solid var(--border2);overflow:hidden}
@@ -398,211 +404,26 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
         <div class="session-photo-cap">IOS view during a live session — dual screens, cockpit ahead</div>
       </div>
 
-      <!-- Panel A: session plan builder -->
-      <div class="ui-panel">
-        <div class="ui-bar">
-          <div class="ui-dot" style="background:#F87171"></div>
-          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
-          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
-          <div style="margin-left:auto;display:flex;gap:4px">
-            <div class="ui-tab">SES</div>
-            <div class="ui-tab-off">ORC</div>
-            <div class="ui-tab-off">DBF</div>
-          </div>
-        </div>
-        <div class="ui-body">
-          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">BUILD SESSION PLAN · S-0013 · OPC</div>
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:9px;font-weight:700;color:#64748B;letter-spacing:.06em;padding:0 0 8px">
-            <div>SLOT</div><div>PHASE</div><div>DOD</div><div>ROLE</div><div>PIN</div>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">01</span>
-            <span class="ui-row-label">Ph1 · Pre-flight</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">02</span>
-            <span class="ui-row-label">Ph2 · Take-off</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#F5A623;font-size:11px">★</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">03</span>
-            <span class="ui-row-label">Ph6 · Approach</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
-            <span style="font-size:9px;color:#34D399;font-weight:600">PM</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">04</span>
-            <span class="ui-row-label">Ph7 · Landing</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div style="margin-top:12px;background:#F5A623;border-radius:5px;padding:9px;text-align:center;font-size:11px;font-weight:800;color:#111;letter-spacing:.05em">BUILD SESSION PLAN</div>
-        </div>
+      <!-- Real screenshot: ORC — upload & live grading -->
+      <div class="app-screenshot">
+        <img src="images/app-orca-upload.jpg" alt="SimSynch OPC & ORCA Workflow tab showing live exercise grading, workflow steps, and grading progress">
+        <div class="app-screenshot-cap">OPC &amp; ORCA Workflow — upload a program, then grade each behaviour live against the OPC workflow steps</div>
       </div>
 
-      <!-- Panel B: upload programme -->
-      <div class="ui-panel" style="margin-top:16px">
-        <div class="ui-bar">
-          <div class="ui-dot" style="background:#F87171"></div>
-          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
-          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
-          <div style="margin-left:auto;display:flex;gap:4px">
-            <div class="ui-tab-off">SES</div>
-            <div class="ui-tab">ORC</div>
-            <div class="ui-tab-off">DBF</div>
-          </div>
-        </div>
-        <div class="ui-body">
-          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">UPLOAD PROGRAMME · AUTO-DETECT · S-0013</div>
-          <div class="upload-drop">
-            <span style="font-size:20px">📄</span>
-            <div>
-              <div class="fname">FCOM_Abnormal_Procedures.pdf</div>
-              <div class="fdetect">✓ Format detected — FCOM abnormal procedures</div>
-            </div>
-          </div>
-          <div class="match-row">
-            <span class="match-code">ENG</span>
-            <span class="match-label">Engine Fire After Take-off</span>
-            <div class="match-bar-track"><div class="match-bar" style="width:96%;background:#34D399"></div></div>
-            <span class="match-val" style="color:#34D399">96%</span>
-          </div>
-          <div class="match-row">
-            <span class="match-code">HYD</span>
-            <span class="match-label">Dual Hydraulic Failure</span>
-            <div class="match-bar-track"><div class="match-bar" style="width:91%;background:#34D399"></div></div>
-            <span class="match-val" style="color:#34D399">91%</span>
-          </div>
-          <div class="match-row">
-            <span class="match-code">CAB</span>
-            <span class="match-label">Rapid Depressurization</span>
-            <div class="match-bar-track"><div class="match-bar" style="width:88%;background:#34D399"></div></div>
-            <span class="match-val" style="color:#34D399">88%</span>
-          </div>
-          <div class="match-row">
-            <span class="match-code">GPWS</span>
-            <span class="match-label">Terrain Awareness Warning</span>
-            <div class="match-bar-track"><div class="match-bar" style="width:62%;background:#F5A623"></div></div>
-            <span class="match-val" style="color:#F5A623">62%</span>
-          </div>
-          <div style="margin-top:12px;background:#F5A623;border-radius:5px;padding:9px;text-align:center;font-size:11px;font-weight:800;color:#111;letter-spacing:.05em">CONFIRM MAPPING · 4 EVENTS</div>
-        </div>
+      <!-- Real screenshot: DBF — debrief and graded record -->
+      <div class="app-screenshot">
+        <img src="images/app-debrief.jpg" alt="SimSynch Session Debrief tab showing competency radar, session result, and the full graded observable behaviour record">
+        <div class="app-screenshot-cap">Session Debrief — competency radar, overall result, focus areas, and the full graded OB record beneath it</div>
       </div>
 
-      <!-- Panel C: ORCA grading, live -->
-      <div class="ui-panel" style="margin-top:16px">
-        <div class="ui-bar">
-          <div class="ui-dot" style="background:#F87171"></div>
-          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
-          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
-          <div style="margin-left:auto;display:flex;gap:4px">
-            <div class="ui-tab-off">SES</div>
-            <div class="ui-tab">ORC</div>
-            <div class="ui-tab-off">DBF</div>
-          </div>
-        </div>
-        <div class="ui-body">
-          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">ORCA GRADING · LIVE · S-0013 · SLOT 03</div>
-          <div class="ob-row">
-            <span class="ob-tag">FCOM_PRO</span>
-            <span class="ob-desc">Maintains aircraft control throughout the event</span>
-            <div class="ui-grade grade-green">4</div>
-          </div>
-          <div class="ob-row">
-            <span class="ob-tag">QRH</span>
-            <span class="ob-desc">Applies ECAM actions in the correct sequence</span>
-            <div class="ui-grade grade-amber">3</div>
-          </div>
-          <div class="ob-row">
-            <span class="ob-tag">OM_A</span>
-            <span class="ob-desc">Manages workload without deviating from SOP</span>
-            <div class="ui-grade grade-red">2</div>
-          </div>
-          <div class="ob-row">
-            <span class="ob-tag">EASA_EBT</span>
-            <span class="ob-desc">Communicates threats and errors to PM</span>
-            <div class="ui-grade grade-green">4</div>
-          </div>
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px;background:#171C24;border-radius:6px">
-            <div>
-              <div style="font-size:9px;color:#64748B;letter-spacing:.1em;margin-bottom:3px">CONTROLLING GRADE</div>
-              <div style="font-size:24px;font-weight:800;color:#F87171;letter-spacing:-.03em">2</div>
-            </div>
-            <div style="font-size:10px;font-weight:800;color:#F87171;background:rgba(248,113,113,.14);padding:6px 14px;border-radius:4px;border:1px solid rgba(248,113,113,.3)">OM_A BELOW MAL</div>
-          </div>
-          <div style="font-size:9px;color:#64748B;margin-top:8px">Every OB saves the instant it's graded — no batch submit, nothing lost if the session runs long.</div>
-        </div>
-      </div>
-
-      <!-- Panel D: session debrief -->
-      <div class="ui-panel" style="margin-top:16px">
-        <div class="ui-bar">
-          <div class="ui-dot" style="background:#F87171"></div>
-          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
-          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
-          <div style="margin-left:auto;display:flex;gap:4px">
-            <div class="ui-tab-off">SES</div>
-            <div class="ui-tab-off">ORC</div>
-            <div class="ui-tab">DBF</div>
-          </div>
-        </div>
-        <div class="ui-body">
-          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">SESSION DEBRIEF · S-0012 · OPC · COMPLETE</div>
-          <!-- Competency bars -->
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">APK</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:80%;background:#34D399"></div></div>
-            <div class="ui-comp-val" style="color:#34D399">4</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">COM</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:60%;background:#F5A623"></div></div>
-            <div class="ui-comp-val" style="color:#F5A623">3</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">FPM</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:80%;background:#34D399"></div></div>
-            <div class="ui-comp-val" style="color:#34D399">4</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">FPA</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:100%;background:#34D399"></div></div>
-            <div class="ui-comp-val" style="color:#34D399">5</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">PSD</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:40%;background:#F87171"></div></div>
-            <div class="ui-comp-val" style="color:#F87171">2</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">SAW</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:80%;background:#34D399"></div></div>
-            <div class="ui-comp-val" style="color:#34D399">4</div>
-          </div>
-          <div class="ui-comp-row">
-            <div class="ui-comp-code">WLM</div>
-            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:60%;background:#F5A623"></div></div>
-            <div class="ui-comp-val" style="color:#F5A623">3</div>
-          </div>
-          <!-- Result -->
-          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px;background:#171C24;border-radius:6px">
-            <div>
-              <div style="font-size:9px;color:#64748B;letter-spacing:.1em;margin-bottom:3px">RESULT</div>
-              <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:-.03em">3.7</div>
-            </div>
-            <div style="font-size:10px;font-weight:800;color:#F87171;background:rgba(248,113,113,.14);padding:6px 14px;border-radius:4px;border:1px solid rgba(248,113,113,.3)">RETRAIN · PSD</div>
-          </div>
-          <div style="font-size:9px;color:#64748B;margin-top:8px">PSD graded 2 — below MAL. All other competencies at or above Minimum Acceptable Level. OM-D §3.1.1.1</div>
-        </div>
+      <!-- Real screenshot: DBF continued — full graded record -->
+      <div class="app-screenshot">
+        <img src="images/app-orca-detail.jpg" alt="SimSynch debrief record continued, showing further graded observable behaviours and the next exercise">
+        <div class="app-screenshot-cap">Every observed behaviour stays attached to its exercise and phase — nothing is summarised away before the debrief</div>
       </div>
     </div>
+  </div>
+</section>
   </div>
 </section>
 
