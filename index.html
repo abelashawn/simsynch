@@ -117,6 +117,22 @@ h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-he
 .tag-amber{background:var(--amber2);color:var(--amber);border:1px solid rgba(245,166,35,.25)}
 .tag-green{background:var(--green2);color:var(--green);border:1px solid rgba(52,211,153,.25)}
 
+/* ── UPLOAD MOCKUP ── */
+.upload-drop{border:1px dashed var(--border2);border-radius:6px;padding:14px 16px;display:flex;align-items:center;gap:10px;margin-bottom:12px;background:#0D1117}
+.upload-drop .fname{font-size:11px;font-weight:600;color:#fff}
+.upload-drop .fdetect{font-size:9px;color:var(--green);margin-top:2px;font-weight:600}
+.match-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:#171C24;border-radius:5px;margin-bottom:4px}
+.match-code{font-size:8px;font-weight:800;background:rgba(245,166,35,.14);color:var(--amber);padding:3px 6px;border-radius:3px;width:40px;text-align:center;flex-shrink:0;letter-spacing:.02em}
+.match-label{flex:1;font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.match-bar-track{width:64px;height:5px;background:#0D1117;border-radius:3px;overflow:hidden;flex-shrink:0}
+.match-bar{height:100%;border-radius:3px}
+.match-val{font-size:9px;font-weight:700;width:26px;text-align:right;flex-shrink:0}
+
+/* ── OB GRADING MOCKUP ── */
+.ob-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#171C24;border-radius:5px;margin-bottom:4px}
+.ob-tag{font-size:8px;font-weight:800;background:rgba(245,166,35,.16);color:var(--amber);padding:3px 6px;border-radius:3px;letter-spacing:.02em;white-space:nowrap;flex-shrink:0}
+.ob-desc{flex:1;font-size:10px;color:var(--muted);line-height:1.3}
+
 /* UI panel mock — actual application snippets */
 .ui-panel{background:#12161D;border:1px solid var(--border2);border-radius:10px;overflow:hidden}
 .ui-bar{background:#0D1117;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
@@ -382,15 +398,159 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
         <div class="session-photo-cap">IOS view during a live session — dual screens, cockpit ahead</div>
       </div>
 
+      <!-- Panel A: session plan builder -->
       <div class="ui-panel">
         <div class="ui-bar">
           <div class="ui-dot" style="background:#F87171"></div>
           <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
           <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
           <div style="margin-left:auto;display:flex;gap:4px">
-            <div class="ui-tab">DBF</div>
+            <div class="ui-tab">SES</div>
+            <div class="ui-tab-off">ORC</div>
+            <div class="ui-tab-off">DBF</div>
+          </div>
+        </div>
+        <div class="ui-body">
+          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">BUILD SESSION PLAN · S-0013 · OPC</div>
+          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:9px;font-weight:700;color:#64748B;letter-spacing:.06em;padding:0 0 8px">
+            <div>SLOT</div><div>PHASE</div><div>DOD</div><div>ROLE</div><div>PIN</div>
+          </div>
+          <div class="ui-row">
+            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">01</span>
+            <span class="ui-row-label">Ph1 · Pre-flight</span>
+            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
+            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
+            <span style="color:#334155">○</span>
+          </div>
+          <div class="ui-row">
+            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">02</span>
+            <span class="ui-row-label">Ph2 · Take-off</span>
+            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
+            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
+            <span style="color:#F5A623;font-size:11px">★</span>
+          </div>
+          <div class="ui-row">
+            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">03</span>
+            <span class="ui-row-label">Ph6 · Approach</span>
+            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
+            <span style="font-size:9px;color:#34D399;font-weight:600">PM</span>
+            <span style="color:#334155">○</span>
+          </div>
+          <div class="ui-row">
+            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">04</span>
+            <span class="ui-row-label">Ph7 · Landing</span>
+            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
+            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
+            <span style="color:#334155">○</span>
+          </div>
+          <div style="margin-top:12px;background:#F5A623;border-radius:5px;padding:9px;text-align:center;font-size:11px;font-weight:800;color:#111;letter-spacing:.05em">BUILD SESSION PLAN</div>
+        </div>
+      </div>
+
+      <!-- Panel B: upload programme -->
+      <div class="ui-panel" style="margin-top:16px">
+        <div class="ui-bar">
+          <div class="ui-dot" style="background:#F87171"></div>
+          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
+          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
+          <div style="margin-left:auto;display:flex;gap:4px">
+            <div class="ui-tab-off">SES</div>
+            <div class="ui-tab">ORC</div>
+            <div class="ui-tab-off">DBF</div>
+          </div>
+        </div>
+        <div class="ui-body">
+          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">UPLOAD PROGRAMME · AUTO-DETECT · S-0013</div>
+          <div class="upload-drop">
+            <span style="font-size:20px">📄</span>
+            <div>
+              <div class="fname">FCOM_Abnormal_Procedures.pdf</div>
+              <div class="fdetect">✓ Format detected — FCOM abnormal procedures</div>
+            </div>
+          </div>
+          <div class="match-row">
+            <span class="match-code">ENG</span>
+            <span class="match-label">Engine Fire After Take-off</span>
+            <div class="match-bar-track"><div class="match-bar" style="width:96%;background:#34D399"></div></div>
+            <span class="match-val" style="color:#34D399">96%</span>
+          </div>
+          <div class="match-row">
+            <span class="match-code">HYD</span>
+            <span class="match-label">Dual Hydraulic Failure</span>
+            <div class="match-bar-track"><div class="match-bar" style="width:91%;background:#34D399"></div></div>
+            <span class="match-val" style="color:#34D399">91%</span>
+          </div>
+          <div class="match-row">
+            <span class="match-code">CAB</span>
+            <span class="match-label">Rapid Depressurization</span>
+            <div class="match-bar-track"><div class="match-bar" style="width:88%;background:#34D399"></div></div>
+            <span class="match-val" style="color:#34D399">88%</span>
+          </div>
+          <div class="match-row">
+            <span class="match-code">GPWS</span>
+            <span class="match-label">Terrain Awareness Warning</span>
+            <div class="match-bar-track"><div class="match-bar" style="width:62%;background:#F5A623"></div></div>
+            <span class="match-val" style="color:#F5A623">62%</span>
+          </div>
+          <div style="margin-top:12px;background:#F5A623;border-radius:5px;padding:9px;text-align:center;font-size:11px;font-weight:800;color:#111;letter-spacing:.05em">CONFIRM MAPPING · 4 EVENTS</div>
+        </div>
+      </div>
+
+      <!-- Panel C: ORCA grading, live -->
+      <div class="ui-panel" style="margin-top:16px">
+        <div class="ui-bar">
+          <div class="ui-dot" style="background:#F87171"></div>
+          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
+          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
+          <div style="margin-left:auto;display:flex;gap:4px">
+            <div class="ui-tab-off">SES</div>
+            <div class="ui-tab">ORC</div>
+            <div class="ui-tab-off">DBF</div>
+          </div>
+        </div>
+        <div class="ui-body">
+          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">ORCA GRADING · LIVE · S-0013 · SLOT 03</div>
+          <div class="ob-row">
+            <span class="ob-tag">FCOM_PRO</span>
+            <span class="ob-desc">Maintains aircraft control throughout the event</span>
+            <div class="ui-grade grade-green">4</div>
+          </div>
+          <div class="ob-row">
+            <span class="ob-tag">QRH</span>
+            <span class="ob-desc">Applies ECAM actions in the correct sequence</span>
+            <div class="ui-grade grade-amber">3</div>
+          </div>
+          <div class="ob-row">
+            <span class="ob-tag">OM_A</span>
+            <span class="ob-desc">Manages workload without deviating from SOP</span>
+            <div class="ui-grade grade-red">2</div>
+          </div>
+          <div class="ob-row">
+            <span class="ob-tag">EASA_EBT</span>
+            <span class="ob-desc">Communicates threats and errors to PM</span>
+            <div class="ui-grade grade-green">4</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px;background:#171C24;border-radius:6px">
+            <div>
+              <div style="font-size:9px;color:#64748B;letter-spacing:.1em;margin-bottom:3px">CONTROLLING GRADE</div>
+              <div style="font-size:24px;font-weight:800;color:#F87171;letter-spacing:-.03em">2</div>
+            </div>
+            <div style="font-size:10px;font-weight:800;color:#F87171;background:rgba(248,113,113,.14);padding:6px 14px;border-radius:4px;border:1px solid rgba(248,113,113,.3)">OM_A BELOW MAL</div>
+          </div>
+          <div style="font-size:9px;color:#64748B;margin-top:8px">Every OB saves the instant it's graded — no batch submit, nothing lost if the session runs long.</div>
+        </div>
+      </div>
+
+      <!-- Panel D: session debrief -->
+      <div class="ui-panel" style="margin-top:16px">
+        <div class="ui-bar">
+          <div class="ui-dot" style="background:#F87171"></div>
+          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
+          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
+          <div style="margin-left:auto;display:flex;gap:4px">
             <div class="ui-tab-off">SES</div>
             <div class="ui-tab-off">ORC</div>
+            <div class="ui-tab">DBF</div>
           </div>
         </div>
         <div class="ui-body">
@@ -440,48 +600,6 @@ footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40p
             <div style="font-size:10px;font-weight:800;color:#F87171;background:rgba(248,113,113,.14);padding:6px 14px;border-radius:4px;border:1px solid rgba(248,113,113,.3)">RETRAIN · PSD</div>
           </div>
           <div style="font-size:9px;color:#64748B;margin-top:8px">PSD graded 2 — below MAL. All other competencies at or above Minimum Acceptable Level. OM-D §3.1.1.1</div>
-        </div>
-      </div>
-
-      <!-- Second panel: session setup -->
-      <div class="ui-panel" style="margin-top:16px">
-        <div class="ui-bar">
-          <div style="font-size:9px;font-weight:700;color:#F5A623;letter-spacing:.06em">GEN</div>
-          <div style="font-size:9px;color:#64748B;margin-left:8px">BUILD SESSION PLAN</div>
-        </div>
-        <div class="ui-body">
-          <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:4px;font-size:9px;font-weight:700;color:#64748B;letter-spacing:.06em;padding:0 0 8px">
-            <div>SLOT</div><div>PHASE</div><div>DOD</div><div>ROLE</div><div>PIN</div>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">01</span>
-            <span class="ui-row-label">Ph1 · Pre-flight</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">02</span>
-            <span class="ui-row-label">Ph2 · Take-off</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#F5A623;font-size:11px">★</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">03</span>
-            <span class="ui-row-label">Ph6 · Approach</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 2</span>
-            <span style="font-size:9px;color:#34D399;font-weight:600">PM</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div class="ui-row">
-            <span style="font-size:11px;font-weight:800;color:#F5A623;width:20px">04</span>
-            <span class="ui-row-label">Ph7 · Landing</span>
-            <span style="font-size:9px;background:#1E2736;color:#94A3B8;padding:2px 6px;border-radius:3px;font-weight:700">DOD 1</span>
-            <span style="font-size:9px;color:#60A5FA;font-weight:600">PF</span>
-            <span style="color:#334155">○</span>
-          </div>
-          <div style="margin-top:12px;background:#F5A623;border-radius:5px;padding:9px;text-align:center;font-size:11px;font-weight:800;color:#111;letter-spacing:.05em">BUILD SESSION PLAN</div>
         </div>
       </div>
     </div>
