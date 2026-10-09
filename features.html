@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Features · SimSynch™</title>
+<meta name="description" content="Every SimSynch™ feature in one place: session planning, grading, instructor calibration, training analytics, EASA compliance, real screenshots, and how it compares to paper-based training.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0B0E14;
+  --ink2:#141922;
+  --amber:#F5A623;
+  --amber2:rgba(245,166,35,.12);
+  --green:#34D399;
+  --green2:rgba(52,211,153,.12);
+  --red:#F87171;
+  --slate:#94A3B8;
+  --slate2:#64748B;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.13);
+  --text:#E2E8F0;
+  --muted:#94A3B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--ink);color:var(--text);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(11,14,20,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--muted);font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.01em;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-demo{color:var(--green)!important;font-weight:600}
+.nav-cta{background:var(--amber);color:#111;font-size:12px;font-weight:700;padding:8px 18px;border-radius:5px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+.demo-float{position:fixed;right:24px;bottom:24px;z-index:200;display:flex;align-items:center;gap:8px;background:var(--green);color:#06281c;font-size:13px;font-weight:700;padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
+.demo-float:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.4)}
+.demo-float::before{content:'';width:7px;height:7px;border-radius:50%;background:#06281c;flex-shrink:0}
+@media(max-width:900px){.demo-float{right:16px;bottom:16px;padding:11px 16px;font-size:12px}}
+
+/* page header (no photo hero on this page) */
+.page-header{padding:160px 40px 80px;border-bottom:1px solid var(--border);background:var(--ink)}
+.page-header-inner{max-width:1200px;margin:0 auto}
+.amber-rule{width:40px;height:2px;background:var(--amber);margin-bottom:24px}
+.page-header h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.03em;line-height:1.05;color:#fff;margin-bottom:20px}
+.page-header p{font-size:17px;color:var(--muted);max-width:620px;line-height:1.7}
+
+section{padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-full{max-width:none;padding-left:0;padding-right:0}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:#fff;margin-bottom:20px}
+.section-lead{font-size:17px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:60px}
+
+.btn-primary{background:var(--amber);color:#111;font-size:14px;font-weight:700;padding:14px 28px;border-radius:6px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s;display:inline-block}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding-bottom:2px;transition:color .15s,border-color .15s}
+.btn-secondary:hover{color:var(--text);border-color:var(--slate2)}
+
+.step-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.step-body{font-size:14px;color:var(--muted);line-height:1.65}
+
+.screens-gallery{max-width:1200px;margin:0 auto;padding:0 40px}
+.screens-gallery-head{font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:.1em;margin-bottom:16px}
+.screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.screen-thumb{display:block;border-radius:6px;overflow:hidden;border:1px solid var(--border2);cursor:zoom-in;background:#0D1117}
+.screen-thumb img{width:100%;height:auto;display:block;transition:transform .25s}
+.screen-thumb:hover img{transform:scale(1.03)}
+.screen-thumb-cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+.screen-thumb-cap strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(5,7,10,.94);display:none;align-items:center;justify-content:center;padding:40px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox-close{position:absolute;top:24px;right:32px;font-size:28px;color:#fff;cursor:pointer;line-height:1;opacity:.7}
+.lightbox-close:hover{opacity:1}
+
+.plain-section{background:var(--ink);border-top:1px solid var(--border)}
+.plain-section-inner{max-width:1200px;margin:0 auto;padding:90px 40px}
+.compliance-list{display:flex;flex-direction:column;gap:16px}
+.comp-item{display:flex;gap:16px;align-items:flex-start}
+.comp-check{font-size:13px;color:var(--green);flex-shrink:0;margin-top:2px;font-weight:700}
+.comp-text{font-size:14px;color:var(--muted);line-height:1.55}
+.comp-text strong{color:var(--text);font-weight:600}
+
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.feature{background:var(--ink);padding:40px;position:relative}
+.feature-icon{font-size:28px;margin-bottom:20px;display:block}
+.feature-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:12px}
+.feature-body{font-size:14px;color:var(--muted);line-height:1.65}
+.feature-detail{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--slate2)}
+.feature-new{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--green);background:var(--green2);border:1px solid rgba(52,211,153,.3);padding:3px 7px;border-radius:3px;margin-bottom:14px}
+
+.compliance{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 40px}
+.compliance-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center}
+.compliance-title{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.1}
+
+.compare-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{padding:14px 20px;text-align:left;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;border-bottom:2px solid var(--border2)}
+thead th:not(:first-child){text-align:center}
+td{padding:14px 20px;border-bottom:1px solid var(--border);color:var(--muted)}
+td:first-child{color:var(--text);font-weight:500}
+td:not(:first-child){text-align:center}
+.check-yes{color:var(--green);font-weight:700;font-size:16px}
+.check-no{color:var(--border2);font-weight:700;font-size:16px}
+.col-highlight{background:rgba(245,166,35,.04)}
+thead th.col-highlight{color:var(--amber)}
+
+.demo-cta{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.demo-cta-inner{max-width:1200px;margin:0 auto;padding:80px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+.demo-cta-inner h2{margin-bottom:16px}
+.demo-list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.demo-list-item{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted);line-height:1.6}
+.demo-list-item span{color:var(--green);font-weight:700}
+
+footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-brand{font-weight:700;font-size:13px;color:var(--muted)}
+.footer-legal{font-size:11px;color:var(--slate2);text-align:right;line-height:1.6}
+
+@media(max-width:900px){
+  .features{grid-template-columns:1fr}
+  .compliance-inner{grid-template-columns:1fr}
+  .screens-grid{grid-template-columns:1fr}
+  .demo-cta-inner{grid-template-columns:1fr}
+  .page-header{padding:120px 20px 60px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  section{padding:60px 20px}
+  .screens-gallery{padding:0 20px}
+  footer{flex-direction:column;text-align:center}
+  .footer-legal{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="index.html">
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="38" height="38" rx="7" fill="#F5A623"/>
+      <path d="M10 26 A12 12 0 0 1 28 26" stroke="#111" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <line x1="19" y1="14" x2="19" y2="10" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="19" cy="27" r="2.5" fill="#111"/>
+      <line x1="19" y1="24.5" x2="25" y2="18" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div style="font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1;color:#fff">SimSynch<span style="font-size:9px;vertical-align:super;color:#F5A623">™</span></div>
+      <div style="font-size:9px;font-weight:500;color:#64748B;letter-spacing:.06em;line-height:1;margin-top:1px">A320 EBT PLATFORM</div>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="#compliance">EASA compliance</a>
+    <a href="#compare">vs. paper-based</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="https://demo.simsynch.com" class="nav-demo">Try the demo</a>
+  </div>
+  <a href="mailto:training@simsynch.com" class="nav-cta">Request access</a>
+</nav>
+
+<a href="https://demo.simsynch.com" class="demo-float">Try the live demo</a>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-inner">
+    <div class="amber-rule"></div>
+    <h1>Everything SimSynch™ does, in one place.</h1>
+    <p>Every feature, every screen, the full EASA compliance list, and how it compares to paper-based training — with real screenshots from the running application.</p>
+  </div>
+</div>
+
+<!-- FULL FEATURES GRID -->
+<div class="section-full" id="features" style="background:var(--ink2);border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:80px 40px 0">
+    <div class="amber-rule"></div>
+    <h2>What changes when you use SimSynch™.</h2>
+    <p class="section-lead">Concrete improvements in how simulator instruction is planned, delivered, graded, and standardised.</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <span class="feature-icon">🗂</span>
+      <div class="feature-title">No more blank paper forms</div>
+      <div class="feature-body">Observable Behaviour checklists generate automatically from the selected exercises — not handwritten or printed the night before. The right OBs are attached before the session starts.</div>
+      <div class="feature-detail">Sourced from FCTM, QRH, Instructor Guide, OM-A/B — ATA-family fallback for generic malfunctions</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Grade during the session, not after</div>
+      <div class="feature-body">Every grade saves the instant you click. Notes save on blur. No "Save" button to forget. When the session ends, the debrief record is already complete.</div>
+      <div class="feature-detail">Real-time persistence · ORCA controlling-grade rule applied live</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">📄</span>
+      <div class="feature-title">Upload any operator programme</div>
+      <div class="feature-body">LPC/OPC Instructor Guide, FCOM abnormal procedures PDF, or EBT lesson plan — SimSynch auto-detects the format, extracts the training events, and maps them to the library.</div>
+      <div class="feature-detail">Multi-format parsing with no manual configuration</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">📊</span>
+      <div class="feature-title">Competency evidence, not just grades</div>
+      <div class="feature-body">The debrief shows a competency radar built from the OBs actually observed, not averaged from a single overall score. The evidence is there before you open your mouth in the debrief.</div>
+      <div class="feature-detail">Aggregated live from OB selections and per-pilot competency grades</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🔧</span>
+      <div class="feature-title">Malfunction and MEL libraries built in</div>
+      <div class="feature-body">230 malfunctions searchable by ATA chapter, injectable directly into a slot. 677 MEL items cross-referenced and surfaced automatically wherever grading touches a dispatch item.</div>
+      <div class="feature-detail">ATA-filtered malfunction search · live MEL OB enrichment</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🏛</span>
+      <div class="feature-title">EASA structure, not an afterthought</div>
+      <div class="feature-body">MAL threshold = 3 throughout. Any competency graded below 3 triggers RETRAIN regardless of overall average — the ORCA controlling-grade principle, structurally enforced.</div>
+      <div class="feature-detail">OM-D §3.1.1.1 · AMC1 ORO.FC.231 · CBTA framework</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">🎯</span>
+      <div class="feature-title">Instructor calibration</div>
+      <div class="feature-body">Blind grading exercises across instructors, an OB-by-OB workshop view, lean and halo detection, and a Krippendorff's alpha agreement score — plus shadow grading for live standardisation checks.</div>
+      <div class="feature-detail">Fleet-standard grades saved and shown per OB · CSV export</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">📈</span>
+      <div class="feature-title">Training analytics</div>
+      <div class="feature-body">First-attempt pass rate, competency trend by quarter, pilots × competencies heat map, exercises that fail most, and instructor grading spread — all exportable to CSV.</div>
+      <div class="feature-detail">EASA training-need pattern flags per AMC1 ORO.FC.231(d)(1)(b)(3)</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">👤</span>
+      <div class="feature-title">Per-pilot grading, CM1/CM2</div>
+      <div class="feature-body">Captain and First Officer graded separately on the OM-D scale, PF/PM recorded per exercise. Second-attempt and competency-cap rules applied automatically, with a full audit trail.</div>
+      <div class="feature-detail">Grade history logged — who, when, old and new value</div>
+    </div>
+  </div>
+  <div style="height:80px"></div>
+</div>
+
+<!-- SCREENSHOTS GALLERY — ALL 9 -->
+<div class="screens-gallery" style="margin-top:100px">
+  <div class="screens-gallery-head">THE APPLICATION — REAL SCREENS FROM THE RUNNING DEMO</div>
+  <div class="screens-grid">
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/09-calibration-workshop.png')">
+      <img src="screenshots/09-calibration-workshop.webp" alt="Instructor calibration workshop comparing blind grades across five instructors with Krippendorff's alpha">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/07-analytics-overview.png')">
+      <img src="screenshots/07-analytics-overview.webp" alt="Training analytics overview with headline figures and competency trend by quarter">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/03-lpc-opc-grading.png')">
+      <img src="screenshots/03-lpc-opc-grading.webp" alt="LPC OPC grading screen with Captain and First Officer graded separately on the OM-D scale">
+    </a>
+  </div>
+  <div class="screens-grid" style="margin-top:4px">
+    <div class="screen-thumb-cap"><strong>Calibration workshop</strong>Blind grades compared OB by OB, with an agreement score and each instructor's lean.</div>
+    <div class="screen-thumb-cap"><strong>Training analytics</strong>Pass rate, competency trend, and EASA training-need flags, per pilot and fleet-wide.</div>
+    <div class="screen-thumb-cap"><strong>Per-pilot grading</strong>Captain and First Officer graded separately, OB by OB, on the operator's OM-D scale.</div>
+  </div>
+
+  <div class="screens-grid" style="margin-top:32px">
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/02-session-planner.png')">
+      <img src="screenshots/02-session-planner.webp" alt="Mission-path board showing each exercise as an IOS key with start position, weather and failure lamps">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/08-analytics-instructor-spread-omd.png')">
+      <img src="screenshots/08-analytics-instructor-spread-omd.webp" alt="Exercises that fail most, instructor grading spread, and recurrent OM-D obligations by pilot">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/06-pilot-record-ebt-need.png')">
+      <img src="screenshots/06-pilot-record-ebt-need.webp" alt="Pilot record with competency trends, 12-month exposure, and an EASA training-need flag">
+    </a>
+  </div>
+  <div class="screens-grid" style="margin-top:4px">
+    <div class="screen-thumb-cap"><strong>Scenario builder</strong>Each exercise as an IOS key — start position, weather, and failure triggers set per card.</div>
+    <div class="screen-thumb-cap"><strong>Fleet-wide spread</strong>Exercises that fail most, and where instructor grading drifts from the group average.</div>
+    <div class="screen-thumb-cap"><strong>Pilot records</strong>Competency trend, 12-month exposure, and EASA training-need flags, per pilot.</div>
+  </div>
+
+  <div class="screens-grid" style="margin-top:32px">
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/04-debrief-competency-profile.png')">
+      <img src="screenshots/04-debrief-competency-profile.webp" alt="Session debrief with a competency profile built only from observed behaviours">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/05-hot-sign-off.png')">
+      <img src="screenshots/05-hot-sign-off.webp" alt="Head of Training sign-off screen with per-pilot checks and approve or return controls">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('screenshots/01-demo-login.png')">
+      <img src="screenshots/01-demo-login.webp" alt="Public demo login — one click into the demo as Instructor, Head of Training, or Standardisation lead">
+    </a>
+  </div>
+  <div class="screens-grid" style="margin-top:4px">
+    <div class="screen-thumb-cap"><strong>Debrief</strong>A competency profile built only from the behaviours actually observed.</div>
+    <div class="screen-thumb-cap"><strong>HOT sign-off</strong>Per-pilot verdicts, then approve or return with remarks — approved sessions lock.</div>
+    <div class="screen-thumb-cap"><strong>Public demo</strong>One click into demo.simsynch.com as any of three roles.</div>
+  </div>
+  <div style="text-align:center;margin-top:40px">
+    <a href="whats-new.html" class="btn-secondary">Read the full release notes</a>
+  </div>
+</div>
+
+<!-- SESSION BOARD -->
+<div class="plain-section" style="margin-top:100px">
+  <div class="plain-section-inner">
+    <div class="amber-rule"></div>
+    <h2>Plan sessions like an ops board, not a spreadsheet.</h2>
+    <p class="section-lead">The Session Board replaces the slot table with a visual two-day planning board. Exercises are cards. Days are columns. Phases are swimlanes.</p>
+    <div class="compliance-list" style="margin-top:8px;max-width:800px">
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Two-day layout, three phase swimlanes</strong> — Check/Eval, Manoeuvre, Training — exercises slot automatically into the correct lane.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Drag to reorder</strong> — move any exercise between days, lanes, or positions; flow connectors show the session sequence pictorially.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>DOD and competency tags at a glance</strong> — colour-coded Degree of Difficulty and up to six EASA competency dots on every card.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Board / List toggle</strong> — switch between the visual board and an editable table at any time; drag changes persist instantly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PDF EXPORTS -->
+<div class="plain-section">
+  <div class="plain-section-inner">
+    <div class="amber-rule"></div>
+    <h2>Two documents. One click each. Distribution-ready.</h2>
+    <p class="section-lead">SimSynch generates distribution-ready PDFs directly from the live exercise library. Update an OB, export again — the document reflects the current programme.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:8px">
+      <div>
+        <div class="step-title">Programme Standards Document</div>
+        <div class="step-body">A full training-standards reference for every TRI/TRE before the simulator period begins: competency legend, table of contents, one page per exercise with Pilot Target Actions and numbered OBs, each referenced to its source document.</div>
+      </div>
+      <div>
+        <div class="step-title">Session Flow Diagram</div>
+        <div class="step-body">A pictorial two-day flow diagram of the full programme — CM1/CM2 profiles in parallel swimlanes, failures and triggers marked — built for pre-session briefings and standardisation meetings.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLIANCE -->
+<div class="compliance section-full" id="compliance">
+  <div class="compliance-inner">
+    <div>
+      <div class="amber-rule"></div>
+      <div class="compliance-title">Built for<br>regulatory<br>confidence.</div>
+    </div>
+    <div class="compliance-list">
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>MAL = 3 enforced throughout</strong> — grades 1 and 2 trigger RETRAIN. The grading scale follows OM-D §3.1.1.1 exactly, with no way to configure a non-compliant result.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>ORCA controlling-grade rule applied live</strong> — the lowest observed OB grade caps the session result, per pilot.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Session structure validated against AMC1 ORO.FC.231</strong> — phase coverage, competency coverage, and DOD ceiling checked before you commit.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>EASA training-need patterns flagged automatically</strong> — AMC1 ORO.FC.231(d)(1)(b)(3): a competency graded 2 in consecutive EBT modules, or most competencies at 2 in one module.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Debrief records timestamped and locked</strong> — approval marks the session Complete with a signed timestamp. Once locked, the record is tamper-evident.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Observable Behaviours referenced to source documents</strong> — every OB carries its source tag so the evidence chain is auditable.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Instructor agreement measured, not assumed</strong> — calibration workshops produce a documented inter-rater reliability score per exercise.</div>
+      </div>
+      <div class="comp-item">
+        <span class="comp-check">✓</span>
+        <div class="comp-text"><strong>Account and data security</strong> — new accounts inactive until approved, every table protected by row-level security, security headers on every page.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<section id="compare">
+  <div class="amber-rule"></div>
+  <h2>SimSynch™ vs. the status quo.</h2>
+  <p class="section-lead">Most simulator training programmes still rely on paper forms, spreadsheets, and end-of-session recall. Here's what changes.</p>
+  <div class="compare-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width:34%">Capability</th>
+          <th>Paper / spreadsheet</th>
+          <th class="col-highlight">SimSynch™</th>
+          <th>Generic LMS</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Session plan built from full exercise library</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>Auto-OB attachment from uploaded programme PDF</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>Real-time, per-pilot OB grading (no batch save)</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>ORCA controlling-grade enforced automatically</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>MAL = 3 enforced (not configurable away)</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td>Partial</td>
+        </tr>
+        <tr>
+          <td>Instructor calibration &amp; agreement scoring</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>Training analytics &amp; EASA training-need flags</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td>Partial</td>
+        </tr>
+        <tr>
+          <td>Session debrief auto-generated at end of check</td>
+          <td><span class="check-no">—</span></td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>Cross-references QRH / FCTM / OM-A / MEL</td>
+          <td>Manual</td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-no">—</span></td>
+        </tr>
+        <tr>
+          <td>Candidate history and recurrent-obligation tracking</td>
+          <td>Spreadsheet</td>
+          <td class="col-highlight"><span class="check-yes">✓</span></td>
+          <td><span class="check-yes">✓</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- PUBLIC DEMO -->
+<div class="demo-cta section-full">
+  <div class="demo-cta-inner">
+    <div>
+      <div class="amber-rule"></div>
+      <h2>Try it yourself — no setup, no sign-up.</h2>
+      <p class="section-lead" style="margin-bottom:0">A public demo at demo.simsynch.com runs on a fictional airline with a full year of sample training data. Enter as Instructor, Head of Training, or Standardisation Lead and switch role at any time.</p>
+    </div>
+    <div>
+      <div class="demo-list">
+        <div class="demo-list-item"><span>✓</span> 24 pilots, 60+ sessions, full analytics and sign-off history</div>
+        <div class="demo-list-item"><span>✓</span> A live calibration workshop to explore</div>
+        <div class="demo-list-item"><span>✓</span> Resets nightly — nothing to clean up</div>
+      </div>
+      <div style="margin-top:28px">
+        <a href="https://demo.simsynch.com" class="btn-primary">Open demo.simsynch.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SimSynch™ · A320 EBT/CBTA Platform · <a href="index.html" style="color:var(--muted);text-decoration:none">Home</a> · <a href="whats-new.html" style="color:var(--muted);text-decoration:none">What's new</a> · <a href="https://demo.simsynch.com" style="color:var(--green);text-decoration:none">demo.simsynch.com</a></div>
+  <div class="footer-legal">
+    EASA AMC1 ORO.FC.231 · OM-D §3.1.1.1 · CBTA framework<br>
+    © 2026 SimSynch™. All rights reserved.
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="lightbox-img" src="" alt="Enlarged screenshot">
+</div>
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>

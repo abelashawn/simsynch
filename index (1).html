@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SimSynch™ — A320 EBT/CBTA Platform for Instructors</title>
+<meta name="description" content="SimSynch™ is the A320 evidence-based training platform for simulator instructors: programme planning, live OB grading, instructor calibration, training analytics, and compliant debrief records — in one place.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --ink:#0B0E14;
+  --ink2:#141922;
+  --amber:#F5A623;
+  --amber2:rgba(245,166,35,.12);
+  --green:#34D399;
+  --green2:rgba(52,211,153,.12);
+  --red:#F87171;
+  --slate:#94A3B8;
+  --slate2:#64748B;
+  --border:rgba(255,255,255,.07);
+  --border2:rgba(255,255,255,.13);
+  --text:#E2E8F0;
+  --muted:#94A3B8;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--ink);color:var(--text);line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:60px;background:rgba(11,14,20,.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{display:flex;align-items:center;gap:10px}
+.nav-logo{width:38px;height:38px;background:var(--amber);border-radius:7px;display:grid;place-items:center;font-weight:900;font-size:18px;color:#111;letter-spacing:-.02em}
+.nav-links{display:flex;gap:32px;align-items:center}
+.nav-links a{color:var(--muted);font-size:13px;font-weight:500;text-decoration:none;letter-spacing:.01em;transition:color .15s}
+.nav-links a:hover{color:var(--text)}
+.nav-demo{color:var(--green)!important;font-weight:600}
+.nav-cta{background:var(--amber);color:#111;font-size:12px;font-weight:700;padding:8px 18px;border-radius:5px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s}
+.nav-cta:hover{opacity:.85}
+
+/* ── FLOATING DEMO BUTTON (always accessible, every page) ── */
+.demo-float{position:fixed;right:24px;bottom:24px;z-index:200;display:flex;align-items:center;gap:8px;background:var(--green);color:#06281c;font-size:13px;font-weight:700;padding:12px 20px;border-radius:999px;text-decoration:none;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .15s,box-shadow .15s}
+.demo-float:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(0,0,0,.4)}
+.demo-float::before{content:'';width:7px;height:7px;border-radius:50%;background:#06281c;flex-shrink:0}
+@media(max-width:900px){.demo-float{right:16px;bottom:16px;padding:11px 16px;font-size:12px}}
+
+/* ── HERO ── */
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;overflow:hidden;padding:120px 40px 80px}
+.hero-bg{position:absolute;inset:0;z-index:0}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 35%}
+.hero-bg-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(11,14,20,.97) 0%,rgba(11,14,20,.88) 28%,rgba(11,14,20,.55) 58%,rgba(11,14,20,.35) 100%)}
+.hero-content{position:relative;z-index:1;max-width:820px}
+.hero-tag{font-size:11px;font-weight:600;color:var(--amber);letter-spacing:.16em;margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--amber)}
+.hero-h1{font-size:clamp(42px,7vw,84px);font-weight:800;line-height:1.0;letter-spacing:-.03em;color:#fff;margin-bottom:32px}
+.hero-h1 em{font-style:normal;color:var(--amber)}
+.hero-sub{font-size:18px;font-weight:400;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:48px}
+.hero-actions{display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.btn-primary{background:var(--amber);color:#111;font-size:14px;font-weight:700;padding:14px 28px;border-radius:6px;text-decoration:none;letter-spacing:.01em;transition:opacity .15s}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{font-size:14px;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:1px solid var(--border2);padding-bottom:2px;transition:color .15s,border-color .15s}
+.btn-secondary:hover{color:var(--text);border-color:var(--slate2)}
+.hero-stats{display:flex;gap:40px;margin-top:64px;padding-top:40px;border-top:1px solid var(--border);flex-wrap:wrap}
+.stat-val{font-size:32px;font-weight:800;color:#fff;letter-spacing:-.03em;line-height:1}
+.stat-lbl{font-size:12px;font-weight:400;color:var(--muted);margin-top:4px}
+@keyframes pulse-in{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.hero-content{animation:pulse-in .7s ease both}
+
+/* ── SECTIONS common ── */
+section{padding:100px 40px;max-width:1200px;margin:0 auto}
+.section-full{max-width:none;padding-left:0;padding-right:0}
+.amber-rule{width:40px;height:2px;background:var(--amber);margin-bottom:24px}
+h2{font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-.025em;line-height:1.1;color:#fff;margin-bottom:20px}
+.section-lead{font-size:17px;color:var(--muted);max-width:580px;line-height:1.7;margin-bottom:60px}
+
+/* ── INTRO STRIP ── */
+.intro-strip{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:0 40px}
+.intro-strip-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.intro-cell{padding:48px 40px;border-right:1px solid var(--border)}
+.intro-cell:last-child{border-right:none}
+.intro-cell-num{font-size:48px;font-weight:800;letter-spacing:-.04em;color:var(--amber);line-height:1}
+.intro-cell-lbl{font-size:14px;font-weight:500;color:var(--muted);margin-top:6px}
+
+/* ── FACILITY ── */
+.facility{border-bottom:1px solid var(--border)}
+.facility-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;padding:100px 40px}
+.facility-text .amber-rule{margin-bottom:24px}
+.facility-photo{border-radius:4px;overflow:hidden;border:1px solid var(--border2)}
+.facility-photo img{width:100%;height:auto;display:block}
+.facility-photo-cap{font-size:11px;color:var(--slate2);margin-top:10px;letter-spacing:.02em}
+
+/* ── HOW IT WORKS ── */
+.workflow{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.workflow-steps{display:flex;flex-direction:column;gap:0}
+.step{display:flex;gap:20px;padding:32px 0;border-bottom:1px solid var(--border)}
+.step:last-child{border-bottom:none}
+.step-num{font-size:11px;font-weight:700;color:var(--amber);letter-spacing:.1em;padding-top:3px;flex-shrink:0;width:28px}
+.step-title{font-size:17px;font-weight:700;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+.step-body{font-size:14px;color:var(--muted);line-height:1.65}
+.step-tag{display:inline-block;margin-top:10px;font-size:10px;font-weight:700;letter-spacing:.1em;padding:3px 8px;border-radius:3px}
+.tag-amber{background:var(--amber2);color:var(--amber);border:1px solid rgba(245,166,35,.25)}
+.tag-green{background:var(--green2);color:var(--green);border:1px solid rgba(52,211,153,.25)}
+
+.ios-strip{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:8px 0}
+.ios-strip a{display:block;border-radius:6px;overflow:hidden;border:1px solid var(--border2);cursor:zoom-in}
+.ios-strip img{width:100%;height:170px;object-fit:cover;display:block;transition:transform .25s}
+.ios-strip a:hover img{transform:scale(1.04)}
+
+.session-photo{border-radius:4px;overflow:hidden;border:1px solid var(--border2);margin-top:16px}
+.session-photo img{width:100%;height:auto;display:block}
+.session-photo-cap{font-size:11px;color:var(--slate2);margin-top:10px}
+
+.screens-gallery{max-width:1200px;margin:72px auto 0;padding:0 40px}
+.screens-gallery-head{font-size:11px;font-weight:700;color:var(--slate2);letter-spacing:.1em;text-transform:none;margin-bottom:16px}
+.screens-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.screen-thumb{display:block;border-radius:6px;overflow:hidden;border:1px solid var(--border2);cursor:zoom-in;background:#0D1117}
+.screen-thumb img{width:100%;height:auto;display:block;transition:transform .25s}
+.screen-thumb:hover img{transform:scale(1.03)}
+.screen-thumb-cap{font-size:12px;color:var(--muted);margin-top:10px;line-height:1.5}
+.screen-thumb-cap strong{color:var(--text);font-weight:600;display:block;margin-bottom:2px}
+
+/* lightbox */
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(5,7,10,.94);display:none;align-items:center;justify-content:center;padding:40px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-width:100%;max-height:100%;border-radius:4px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+.lightbox-close{position:absolute;top:24px;right:32px;font-size:28px;color:#fff;cursor:pointer;line-height:1;opacity:.7}
+.lightbox-close:hover{opacity:1}
+
+/* UI panel mock — actual application snippets */
+.ui-panel{background:#12161D;border:1px solid var(--border2);border-radius:10px;overflow:hidden}
+.ui-bar{background:#0D1117;padding:10px 16px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border)}
+.ui-dot{width:8px;height:8px;border-radius:50%}
+.ui-tab{font-size:10px;font-weight:700;color:var(--amber);background:rgba(245,166,35,.14);padding:3px 10px;border-radius:4px;border:1px solid rgba(245,166,35,.25);letter-spacing:.06em}
+.ui-tab-off{font-size:10px;font-weight:600;color:var(--muted);padding:3px 10px;letter-spacing:.06em}
+.ui-body{padding:16px}
+.ui-row{display:flex;justify-content:space-between;align-items:center;padding:8px 10px;background:#171C24;border-radius:5px;margin-bottom:4px;font-size:11px}
+.ui-row-label{color:var(--muted)}
+.ui-comp-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:#171C24;border-radius:5px;margin-bottom:3px}
+.ui-comp-code{font-size:9px;font-weight:800;background:rgba(245,166,35,.18);color:var(--amber);padding:2px 6px;border-radius:3px;letter-spacing:.06em;width:34px;text-align:center}
+.ui-comp-bar-track{flex:1;height:6px;background:#0D1117;border-radius:3px;overflow:hidden}
+.ui-comp-bar{height:100%;border-radius:3px}
+.ui-comp-val{font-size:11px;font-weight:700;width:20px;text-align:right}
+
+/* ── PROGRAMME / SESSION BOARD / EXPORT shared list sections ── */
+.plain-section{background:var(--ink);border-top:1px solid var(--border)}
+.plain-section-inner{max-width:1200px;margin:0 auto;padding:90px 40px}
+
+/* ── FEATURES ── */
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.feature{background:var(--ink);padding:40px;position:relative}
+.feature-icon{font-size:28px;margin-bottom:20px;display:block}
+.feature-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:-.01em;margin-bottom:12px}
+.feature-body{font-size:14px;color:var(--muted);line-height:1.65}
+.feature-detail{margin-top:16px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--slate2)}
+.feature-new{display:inline-block;font-size:9px;font-weight:800;letter-spacing:.1em;color:var(--green);background:var(--green2);border:1px solid rgba(52,211,153,.3);padding:3px 7px;border-radius:3px;margin-bottom:14px}
+
+/* ── COMPLIANCE STRIP ── */
+.compliance{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:64px 40px}
+.compliance-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 2fr;gap:80px;align-items:center}
+.compliance-title{font-size:30px;font-weight:800;letter-spacing:-.02em;color:#fff;line-height:1.1}
+.compliance-list{display:flex;flex-direction:column;gap:16px}
+.comp-item{display:flex;gap:16px;align-items:flex-start}
+.comp-check{font-size:13px;color:var(--green);flex-shrink:0;margin-top:2px;font-weight:700}
+.comp-text{font-size:14px;color:var(--muted);line-height:1.55}
+.comp-text strong{color:var(--text);font-weight:600}
+
+/* ── CREW BAND ── */
+.crew-band{position:relative;height:420px;overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.crew-band img{width:100%;height:100%;object-fit:cover;object-position:center 30%}
+.crew-band-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(11,14,20,.85) 0%,rgba(11,14,20,.35) 45%,rgba(11,14,20,.1) 100%)}
+.crew-band-cap{position:absolute;left:40px;bottom:32px;max-width:420px;font-size:14px;color:var(--text);line-height:1.6}
+.crew-band-cap strong{display:block;font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.01em}
+
+/* ── TESTIMONIAL / STATEMENT ── */
+.statement{text-align:center;max-width:800px;margin:0 auto}
+.statement-quote{font-size:clamp(22px,3.5vw,36px);font-weight:700;letter-spacing:-.02em;color:#fff;line-height:1.35;margin-bottom:32px}
+.statement-attr{font-size:13px;color:var(--muted)}
+
+/* ── COMPARISON TABLE ── */
+.compare-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px}
+thead th{padding:14px 20px;text-align:left;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.1em;border-bottom:2px solid var(--border2)}
+thead th:not(:first-child){text-align:center}
+td{padding:14px 20px;border-bottom:1px solid var(--border);color:var(--muted)}
+td:first-child{color:var(--text);font-weight:500}
+td:not(:first-child){text-align:center}
+.check-yes{color:var(--green);font-weight:700;font-size:16px}
+.check-no{color:var(--border2);font-weight:700;font-size:16px}
+.col-highlight{background:rgba(245,166,35,.04)}
+thead th.col-highlight{color:var(--amber)}
+
+/* ── DEMO CTA ── */
+.demo-cta{background:var(--ink2);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.demo-cta-inner{max-width:1200px;margin:0 auto;padding:80px 40px;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+.demo-cta-inner h2{margin-bottom:16px}
+.demo-list{display:flex;flex-direction:column;gap:14px;margin-top:8px}
+.demo-list-item{display:flex;gap:12px;align-items:flex-start;font-size:14px;color:var(--muted);line-height:1.6}
+.demo-list-item span{color:var(--green);font-weight:700}
+
+/* ── CTA ── */
+.cta-section{text-align:center;padding:120px 40px;background:var(--ink2);border-top:1px solid var(--border)}
+.cta-h{font-size:clamp(32px,5vw,56px);font-weight:800;letter-spacing:-.03em;color:#fff;line-height:1.1;margin-bottom:20px}
+.cta-sub{font-size:17px;color:var(--muted);margin-bottom:48px}
+.cta-group{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.cta-note{margin-top:20px;font-size:12px;color:var(--slate2)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);border-top:1px solid var(--border);padding:48px 40px;display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-brand{font-weight:700;font-size:13px;color:var(--muted)}
+.footer-legal{font-size:11px;color:var(--slate2);text-align:right;line-height:1.6}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .workflow{grid-template-columns:1fr}
+  .features{grid-template-columns:1fr}
+  .compliance-inner{grid-template-columns:1fr}
+  .intro-strip-inner{grid-template-columns:1fr}
+  .intro-cell{border-right:none;border-bottom:1px solid var(--border);padding:32px 20px}
+  .facility-inner{grid-template-columns:1fr;padding:60px 20px;gap:32px}
+  .screens-grid{grid-template-columns:1fr}
+  .ios-strip{grid-template-columns:1fr}
+  .demo-cta-inner{grid-template-columns:1fr}
+  .crew-band{height:320px}
+  .hero{padding:100px 20px 60px}
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  section{padding:60px 20px}
+  .screens-gallery{padding:0 20px}
+  footer{flex-direction:column;text-align:center}
+  .footer-legal{text-align:center}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="38" height="38" rx="7" fill="#F5A623"/>
+      <path d="M10 26 A12 12 0 0 1 28 26" stroke="#111" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <line x1="19" y1="14" x2="19" y2="10" stroke="#111" stroke-width="2.5" stroke-linecap="round"/>
+      <circle cx="19" cy="27" r="2.5" fill="#111"/>
+      <line x1="19" y1="24.5" x2="25" y2="18" stroke="#111" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    <div>
+      <div style="font-weight:800;font-size:15px;letter-spacing:-.01em;line-height:1">SimSynch<span style="font-size:9px;vertical-align:super;color:#F5A623">™</span></div>
+      <div style="font-size:9px;font-weight:500;color:#64748B;letter-spacing:.06em;line-height:1;margin-top:1px">A320 EBT PLATFORM</div>
+    </div>
+  </div>
+  <div class="nav-links">
+    <a href="#workflow">How it works</a>
+    <a href="features.html">Features</a>
+    <a href="whats-new.html">What's new</a>
+    <a href="https://demo.simsynch.com" class="nav-demo">Try the demo</a>
+  </div>
+  <a href="mailto:training@simsynch.com" class="nav-cta">Request access</a>
+</nav>
+
+<a href="https://demo.simsynch.com" class="demo-float">Try the live demo</a>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg">
+    <img src="images/hero-cockpit.jpg" alt="A320 flight deck instrumentation during a simulator session">
+    <div class="hero-bg-overlay"></div>
+  </div>
+
+  <div class="hero-content">
+    <div style="display:flex;align-items:center;gap:16px;margin-bottom:36px">
+      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect width="64" height="64" rx="12" fill="#F5A623"/>
+        <path d="M14 44 A22 22 0 0 1 50 44" stroke="#111" stroke-width="4" stroke-linecap="round" fill="none"/>
+        <line x1="32" y1="22" x2="32" y2="14" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+        <circle cx="32" cy="45" r="4" fill="#111"/>
+        <line x1="32" y1="41" x2="44" y2="28" stroke="#111" stroke-width="3.5" stroke-linecap="round"/>
+      </svg>
+      <div>
+        <div style="font-size:28px;font-weight:900;letter-spacing:-.03em;color:#fff;line-height:1">SimSynch<sup style="font-size:13px;font-weight:700;color:#F5A623;vertical-align:super">™</sup></div>
+        <div style="font-size:11px;font-weight:500;color:#64748B;letter-spacing:.1em;margin-top:2px">A320 · EVIDENCE-BASED TRAINING PLATFORM</div>
+      </div>
+    </div>
+    <div class="hero-tag">Evidence-Based Training · EASA AMC1 ORO.FC.231</div>
+    <h1 class="hero-h1">Precision grading<br>for <em>every session</em><br>in the sim.</h1>
+    <p class="hero-sub">SimSynch™ gives A320 TREs and TRIs a structured, document-backed platform to plan sessions, observe behaviours, grade competencies, calibrate the instructor team, and produce compliant debrief records — end to end, in one tool.</p>
+    <div class="hero-actions">
+      <a href="#workflow" class="btn-primary">See how it works</a>
+      <a href="https://demo.simsynch.com" class="btn-secondary">Try the live demo</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-val">9</div>
+        <div class="stat-lbl">EASA core competencies tracked</div>
+      </div>
+      <div>
+        <div class="stat-val">230</div>
+        <div class="stat-lbl">malfunctions in the library</div>
+      </div>
+      <div>
+        <div class="stat-val">677</div>
+        <div class="stat-lbl">MEL items cross-referenced</div>
+      </div>
+      <div>
+        <div class="stat-val">Real-time</div>
+        <div class="stat-lbl">OB grading, auto-saved</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- INTRO STRIP -->
+<div class="intro-strip section-full">
+  <div class="intro-strip-inner">
+    <div class="intro-cell">
+      <div class="intro-cell-num">70%</div>
+      <div class="intro-cell-lbl">of simulator session time spent on administration can be eliminated with structured digital grading</div>
+    </div>
+    <div class="intro-cell">
+      <div class="intro-cell-num">ORCA</div>
+      <div class="intro-cell-lbl">method — observe, assess, record, correlate — built into every session from the first scenario to the debrief</div>
+    </div>
+    <div class="intro-cell">
+      <div class="intro-cell-num">One</div>
+      <div class="intro-cell-lbl">platform from programme upload through grading, calibration, analytics, and sign-off</div>
+    </div>
+  </div>
+</div>
+
+<!-- PROGRAMME INTELLIGENCE -->
+<div class="facility" style="background:var(--ink)">
+  <div class="facility-inner">
+    <div>
+      <div class="facility-photo">
+        <a href="javascript:void(0)" onclick="openLightbox('screenshots/02-session-planner.png')" style="cursor:zoom-in;display:block">
+          <img src="screenshots/02-session-planner.webp" alt="Session planner showing the full exercise library as a mission-path board">
+        </a>
+      </div>
+      <div class="facility-photo-cap">The programme board — every exercise, matched and sequenced, before the session starts</div>
+    </div>
+    <div class="facility-text">
+      <div class="amber-rule"></div>
+      <h2 style="margin-bottom:16px">Your entire programme, visible before you fly it.</h2>
+      <p style="color:var(--muted);font-size:15px;line-height:1.75;max-width:460px">SimSynch loads the full A320 EBT/CBTA exercise library the moment you open it — every Observable Behaviour sourced from the FCTM, current QRH, Instructor Guide and OM-A/B, with competency coverage visible before you build a single session.</p>
+    </div>
+  </div>
+</div>
+
+<!-- FACILITY -->
+<div class="facility">
+  <div class="facility-inner">
+    <div class="facility-text">
+      <div class="amber-rule"></div>
+      <h2 style="margin-bottom:16px">Built around the simulator bay, not a generic LMS.</h2>
+      <p style="color:var(--muted);font-size:15px;line-height:1.75;max-width:460px">SimSynch is designed for the instructor station — tablet or IOS-adjacent screen, low light, short windows between exercises. Session planning, grading, and the debrief all happen in the same place the instructor already is.</p>
+    </div>
+    <div>
+      <div class="facility-photo">
+        <img src="images/facility-exterior.jpg" alt="A320 flight deck above cloud at sunset during a simulator session">
+      </div>
+      <div class="facility-photo-cap">A320 full-flight simulator session, dusk approach profile</div>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section id="workflow">
+  <div class="amber-rule"></div>
+  <h2>From programme upload to signed debrief in one platform.</h2>
+  <p class="section-lead">SimSynch follows the actual rhythm of a simulator check — not an abstraction of it. Every step maps directly to what an instructor does in the bay.</p>
+
+  <div class="workflow">
+    <div class="workflow-steps">
+      <div class="step">
+        <div class="step-num">A</div>
+        <div>
+          <div class="step-title">Inject the programme PDF</div>
+          <div class="step-body">Upload any simulator programme document — FCOM abnormal procedures, EBT lesson plan, or Instructor Guide / LPC-OPC. SimSynch parses it, extracts training event titles, and matches them against the exercise library automatically.</div>
+          <span class="step-tag tag-amber">FCOM · Lesson Plan · Instructor Guide</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B</div>
+        <div>
+          <div class="step-title">Select exercises, arrange the days</div>
+          <div class="step-body">Matched exercises land on a visual two-day board, pre-sorted into the correct phase lane. Drag any exercise between days, set sequence within a lane, and assign crew role — CM1, CM2, Both, or Eval — per exercise.</div>
+          <span class="step-tag tag-amber">Day 1 / Day 2 board · CM1 / CM2 roles</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">C</div>
+        <div>
+          <div class="step-title">Grade in real time, per pilot</div>
+          <div class="step-body">The ORCA grading view shows one Observable Behaviour per row, graded separately for CM1 and CM2 on the OM-D scale. Mark it observed, grade it, add a note. Every entry saves immediately — no batch submit, no lost data if the session runs long.</div>
+          <span class="step-tag tag-green">Auto-save · Per-pilot grading · MAL tracking</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">D</div>
+        <div>
+          <div class="step-title">Debrief, sign off, export</div>
+          <div class="step-body">The Session Debrief shows a live competency radar built from the graded OBs. Focus areas (below-MAL competencies) are flagged automatically. The Head of Training approves or returns the session; approved records lock.</div>
+          <span class="step-tag tag-green">Competency radar · HoT sign-off</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- Real IOS / app panels -->
+      <div class="ios-strip">
+        <a href="javascript:void(0)" onclick="openLightbox('images/ios-weather.jpg')">
+          <img src="images/ios-weather.jpg" alt="Instructor station weather and environment setup panel">
+        </a>
+        <a href="javascript:void(0)" onclick="openLightbox('images/ios-map.jpg')">
+          <img src="images/ios-map.jpg" alt="Instructor station takeoff performance and position map">
+        </a>
+      </div>
+
+      <div class="ui-panel" style="margin-top:16px">
+        <div class="ui-bar">
+          <div class="ui-dot" style="background:#F87171"></div>
+          <div class="ui-dot" style="background:#F5A623;margin-left:4px"></div>
+          <div class="ui-dot" style="background:#34D399;margin-left:4px"></div>
+          <div style="margin-left:auto;display:flex;gap:4px">
+            <div class="ui-tab">DBF</div>
+            <div class="ui-tab-off">SES</div>
+            <div class="ui-tab-off">ORC</div>
+          </div>
+        </div>
+        <div class="ui-body">
+          <div style="font-size:10px;font-weight:700;color:#94A3B8;letter-spacing:.08em;margin-bottom:12px">SESSION DEBRIEF · S-0012 · OPC · COMPLETE</div>
+          <div class="ui-comp-row">
+            <div class="ui-comp-code">APK</div>
+            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:80%;background:#34D399"></div></div>
+            <div class="ui-comp-val" style="color:#34D399">4</div>
+          </div>
+          <div class="ui-comp-row">
+            <div class="ui-comp-code">COM</div>
+            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:60%;background:#F5A623"></div></div>
+            <div class="ui-comp-val" style="color:#F5A623">3</div>
+          </div>
+          <div class="ui-comp-row">
+            <div class="ui-comp-code">FPM</div>
+            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:80%;background:#34D399"></div></div>
+            <div class="ui-comp-val" style="color:#34D399">4</div>
+          </div>
+          <div class="ui-comp-row">
+            <div class="ui-comp-code">PSD</div>
+            <div class="ui-comp-bar-track"><div class="ui-comp-bar" style="width:40%;background:#F87171"></div></div>
+            <div class="ui-comp-val" style="color:#F87171">2</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding:12px;background:#171C24;border-radius:6px">
+            <div>
+              <div style="font-size:9px;color:#64748B;letter-spacing:.1em;margin-bottom:3px">RESULT</div>
+              <div style="font-size:24px;font-weight:800;color:#fff;letter-spacing:-.03em">3.7</div>
+            </div>
+            <div style="font-size:10px;font-weight:800;color:#F87171;background:rgba(248,113,113,.14);padding:6px 14px;border-radius:4px;border:1px solid rgba(248,113,113,.3)">RETRAIN · PSD</div>
+          </div>
+          <div style="font-size:9px;color:#64748B;margin-top:8px">PSD graded 2 — below MAL. OM-D §3.1.1.1</div>
+        </div>
+      </div>
+
+      <div class="session-photo">
+        <img src="images/facility-exterior-2.jpg" alt="Night cockpit session, dual display approach profile">
+      </div>
+      <div class="session-photo-cap">Night session — descent and approach profile on the ND</div>
+    </div>
+  </div>
+</section>
+
+<!-- REAL APP SCREENSHOTS GALLERY -->
+<div class="screens-gallery">
+  <div class="screens-gallery-head">THE APPLICATION — LPC UPLOAD &amp; GRADE WORKFLOW</div>
+  <div class="screens-grid">
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('images/app-orca-upload.jpg')">
+      <img src="images/app-orca-upload.jpg" alt="LPC programme upload screen showing matched exercises">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('images/app-orca-detail.jpg')">
+      <img src="images/app-orca-detail.jpg" alt="ORCA exercise detail screen with Observable Behaviours">
+    </a>
+    <a class="screen-thumb" href="javascript:void(0)" onclick="openLightbox('images/app-debrief.jpg')">
+      <img src="images/app-debrief.jpg" alt="Session debrief and grading screen">
+    </a>
+  </div>
+  <div class="screens-grid" style="margin-top:4px">
+    <div class="screen-thumb-cap"><strong>Upload &amp; match</strong>Programme PDF parsed, exercises matched against the library automatically.</div>
+    <div class="screen-thumb-cap"><strong>ORCA, in detail</strong>Every Observable Behaviour, sourced and ready to grade, per exercise.</div>
+    <div class="screen-thumb-cap"><strong>Debrief &amp; grade</strong>Live competency build-up from the OBs actually observed.</div>
+  </div>
+</div>
+
+<!-- FEATURES (condensed — full set on Features page) -->
+<div class="section-full" style="background:var(--ink2);border-top:1px solid var(--border)">
+  <div style="max-width:1200px;margin:0 auto;padding:80px 40px 0">
+    <div class="amber-rule"></div>
+    <h2>What changes when you use SimSynch™.</h2>
+    <p class="section-lead">Concrete improvements in how simulator instruction is planned, delivered, graded, and standardised.</p>
+  </div>
+  <div class="features">
+    <div class="feature">
+      <span class="feature-icon">🗂</span>
+      <div class="feature-title">No more blank paper forms</div>
+      <div class="feature-body">Observable Behaviour checklists generate automatically from the selected exercises. The right OBs are attached before the session starts.</div>
+      <div class="feature-detail">Sourced from FCTM, QRH, Instructor Guide, OM-A/B</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">⚡</span>
+      <div class="feature-title">Grade during the session, not after</div>
+      <div class="feature-body">Every grade saves the instant you click. When the session ends, the debrief record is already complete.</div>
+      <div class="feature-detail">Real-time persistence · ORCA controlling-grade rule applied live</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">🎯</span>
+      <div class="feature-title">Instructor calibration</div>
+      <div class="feature-body">Blind grading across instructors, an OB-by-OB workshop view, and a Krippendorff's alpha agreement score.</div>
+      <div class="feature-detail">Fleet-standard grades saved and shown per OB</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">📈</span>
+      <div class="feature-title">Training analytics</div>
+      <div class="feature-body">First-attempt pass rate, competency trend, and EASA training-need pattern flags — exportable to CSV.</div>
+      <div class="feature-detail">Per AMC1 ORO.FC.231(d)(1)(b)(3)</div>
+    </div>
+    <div class="feature">
+      <span class="feature-new">New</span>
+      <span class="feature-icon">👤</span>
+      <div class="feature-title">Per-pilot grading, CM1/CM2</div>
+      <div class="feature-body">Captain and First Officer graded separately on the OM-D scale, with a full audit trail.</div>
+      <div class="feature-detail">Grade history logged — who, when, old and new value</div>
+    </div>
+    <div class="feature">
+      <span class="feature-icon">🏛</span>
+      <div class="feature-title">EASA structure, not an afterthought</div>
+      <div class="feature-body">MAL threshold = 3 throughout. Any competency below 3 triggers RETRAIN — structurally enforced, not a setting.</div>
+      <div class="feature-detail">OM-D §3.1.1.1 · AMC1 ORO.FC.231 · CBTA framework</div>
+    </div>
+  </div>
+  <div style="text-align:center;padding:48px 40px 80px">
+    <a href="features.html" class="btn-primary">See all features, screenshots &amp; compliance</a>
+  </div>
+</div>
+
+<!-- CREW BAND -->
+<div class="crew-band">
+  <img src="images/crew-band.jpg" alt="A320 cockpit at sunset over the coast during a training flight">
+  <div class="crew-band-overlay"></div>
+  <div class="crew-band-cap">
+    <strong>Built for the instructor's seat.</strong>
+    Every screen in SimSynch is designed around short windows between exercises — not a desk-bound admin tool bolted on afterward.
+  </div>
+</div>
+
+<!-- STATEMENT -->
+<section>
+  <div class="statement">
+    <div class="amber-rule" style="margin:0 auto 24px"></div>
+    <div class="statement-quote">"The simulator bay is already a high-pressure environment. The documentation shouldn't add to it. SimSynch™ gives instructors back their attention — for the crew in front of them, not the clipboard in their hand."</div>
+    <div class="statement-attr">SimSynch™ — A320 EBT/CBTA Instructor Platform</div>
+  </div>
+</section>
+
+<!-- CLOSING CREW PHOTO -->
+<section style="padding-top:0">
+  <div class="facility-photo" style="max-width:760px;margin:0 auto">
+    <img src="images/crew-cockpit.jpg" alt="Flight crew in the A320 flight deck during a simulator session">
+  </div>
+  <div class="facility-photo-cap" style="text-align:center;margin-top:14px">Crew at the controls — the session SimSynch is built to document</div>
+</section>
+
+<!-- PUBLIC DEMO -->
+<div class="demo-cta section-full">
+  <div class="demo-cta-inner">
+    <div>
+      <div class="amber-rule"></div>
+      <h2>Try it yourself — no setup, no sign-up.</h2>
+      <p class="section-lead" style="margin-bottom:0">A public demo at demo.simsynch.com runs on a fictional airline with a full year of sample training data. Enter as Instructor, Head of Training, or Standardisation Lead and switch role at any time.</p>
+    </div>
+    <div>
+      <div class="demo-list">
+        <div class="demo-list-item"><span>✓</span> 24 pilots, 60+ sessions, full analytics and sign-off history</div>
+        <div class="demo-list-item"><span>✓</span> A live calibration workshop to explore</div>
+        <div class="demo-list-item"><span>✓</span> Resets nightly — nothing to clean up</div>
+      </div>
+      <div style="margin-top:28px">
+        <a href="https://demo.simsynch.com" class="btn-primary">Open demo.simsynch.com</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2 class="cta-h">Ready to run your<br>first structured session?</h2>
+  <p class="cta-sub">SimSynch™ is an operational A320 EBT/CBTA platform.<br>Interested in deploying it for your training programme?</p>
+  <div class="cta-group">
+    <a href="mailto:training@simsynch.com" class="btn-primary">Contact the team</a>
+    <a href="features.html" class="btn-secondary">See the full feature list</a>
+  </div>
+  <p class="cta-note">SimSynch™ is a trademark of its developer. Built on Supabase + Next.js.</p>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">SimSynch™ · A320 EBT/CBTA Platform · <a href="features.html" style="color:var(--muted);text-decoration:none">Features</a> · <a href="whats-new.html" style="color:var(--muted);text-decoration:none">What's new</a> · <a href="https://demo.simsynch.com" style="color:var(--green);text-decoration:none">demo.simsynch.com</a></div>
+  <div class="footer-legal">
+    EASA AMC1 ORO.FC.231 · OM-D §3.1.1.1 · CBTA framework<br>
+    © 2026 SimSynch™. All rights reserved.
+  </div>
+</footer>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <div class="lightbox-close" onclick="closeLightbox()">✕</div>
+  <img id="lightbox-img" src="" alt="Enlarged screenshot">
+</div>
+<script>
+function openLightbox(src){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+function closeLightbox(){
+  document.getElementById('lightbox').classList.remove('open');
+}
+document.addEventListener('keydown', function(e){
+  if(e.key === 'Escape') closeLightbox();
+});
+</script>
+
+</body>
+</html>
