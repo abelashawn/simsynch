@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's new · SimSynch™</title>
+<meta name="description" content="Release notes for SimSynch™, the A320 EBT / CBTA training platform: calibration and standardisation, training analytics, the scenario builder, per-pilot grading and more.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0B0E14; --card: #141922; --line: rgba(255,255,255,.12); --text: #E2E8F0; --muted: #94A3B8;
+    --gold: #F5A623; --gold-soft: rgba(245,166,35,.12); --green: #34D399;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.6 'Inter', system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color: var(--gold); }
+  .topnav { display:flex; align-items:center; gap:10px; max-width: 920px; margin: 0 auto; padding: 24px 20px 0; }
+  .topnav-name { font-weight:800; font-size:15px; letter-spacing:-.01em; color:#fff; text-decoration:none; }
+  .topnav-name sup { font-size:9px; color: var(--gold); }
+  .wrap { max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; }
+  header .eyebrow { color: var(--gold); font: 600 12px/1 ui-monospace, Menlo, monospace; letter-spacing: .14em; text-transform: uppercase; }
+  header h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.15; margin: 12px 0 12px; letter-spacing: -.01em; }
+  header p { color: var(--muted); max-width: 680px; margin: 0; }
+  .cta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .btn { display: inline-flex; align-items: center; height: 40px; padding: 0 16px; border-radius: 8px; font-weight: 600; font-size: 14px; text-decoration: none; }
+  .btn.primary { background: var(--gold); color: #1a1406; }
+  .btn.ghost { border: 1px solid var(--line); color: var(--text); }
+  .highlights { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; margin: 40px 0 8px; }
+  .hl { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 16px; }
+  .hl b { display: block; font-size: 15px; margin-bottom: 4px; }
+  .hl span { color: var(--muted); font-size: 14px; }
+  .release { position: relative; margin-top: 48px; padding-left: 28px; border-left: 2px solid var(--line); }
+  .release::before { content: ""; position: absolute; left: -7px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 4px var(--gold-soft); }
+  .release .ver { font: 600 12px/1 ui-monospace, Menlo, monospace; color: var(--gold); letter-spacing: .08em; }
+  .release h2 { font-size: 24px; margin: 8px 0 4px; }
+  .release .sub { color: var(--muted); margin: 0 0 18px; }
+  .group { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; margin-top: 12px; }
+  .group h3 { font-size: 16px; margin: 0 0 8px; display: flex; align-items: center; gap: 8px; }
+  .group h3 .tag { font: 600 10px/1 ui-monospace, Menlo, monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--green); border: 1px solid rgba(63, 185, 138, .4); border-radius: 999px; padding: 4px 8px; }
+  .group ul { margin: 0; padding-left: 18px; }
+  .group li { margin: 6px 0; color: #d3dbe3; }
+  .group li strong { color: var(--text); }
+  .shot { margin: 16px 0 0; }
+  .shot a { display: block; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; background: #0a0d12; transition: border-color .15s; }
+  .shot a:hover { border-color: var(--gold); }
+  .shot img { display: block; width: 100%; height: auto; }
+  .shot figcaption { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .shot.narrow { max-width: 380px; }
+  .shot.hero { margin-top: 32px; }
+  .shot.hero a { box-shadow: 0 24px 60px rgba(0,0,0,.45); }
+  footer { margin-top: 64px; padding-top: 20px; border-top: 1px solid var(--line); color: var(--muted); font-size: 13px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: space-between; }
+  @media (max-width: 520px) { .wrap { padding-top: 36px; } .release { padding-left: 20px; } .group { padding: 16px; } }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a class="topnav-name" href="index.html">SimSynch<sup>™</sup> · A320 EBT Platform</a>
+</div>
+
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow">Release notes</div>
+    <h1>What's new in SimSynch™</h1>
+    <p>SimSynch is the A320 evidence-based training platform for simulator instructors and training departments: plan the session, grade the Observable Behaviours live, debrief each pilot, and sign off — all in one place. Here is everything that has changed, newest first.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://demo.simsynch.com">Try the demo</a>
+      <a class="btn ghost" href="index.html">Back to SimSynch.com</a>
+    </div>
+  </header>
+
+  <section class="highlights" aria-label="Highlights">
+    <div class="hl"><b>Instructor calibration</b><span>Blind grading workshops, shadow grading and an agreement score for the team.</span></div>
+    <div class="hl"><b>Training analytics</b><span>Trends, failing exercises, instructor spread and EASA training-need flags.</span></div>
+    <div class="hl"><b>Scenario builder</b><span>IOS-style board with start positions, weather changes and triggered failures.</span></div>
+    <div class="hl"><b>Per-pilot grading</b><span>Captain and First Officer graded separately, OB by OB, with a full audit trail.</span></div>
+  </section>
+
+  <figure class="shot hero"><a href="screenshots/07-analytics-overview.png" target="_blank" rel="noopener"><img src="screenshots/07-analytics-overview.webp" width="1600" height="1000" loading="lazy" alt="Training analytics for the Head of Training — headline figures and the competency trend by quarter."></a><figcaption>Training analytics for the Head of Training — headline figures and the competency trend by quarter.</figcaption></figure>
+
+  <!-- ── Version 16 ─────────────────────────────────────────────── -->
+  <section class="release">
+    <div class="ver">VERSION 16 · OCTOBER 2026</div>
+    <h2>Standardisation, analytics and a public demo</h2>
+    <p class="sub">Tools for the Head of Training and standardisation leads, and an open demo anyone can try.</p>
+
+    <div class="group">
+      <h3>Instructor calibration <span class="tag">New</span></h3>
+      <ul>
+        <li><strong>Calibration exercises:</strong> several instructors grade the same recorded exercise <em>blind</em> — nobody sees anyone else's grades until the lead reveals them.</li>
+        <li><strong>Workshop view:</strong> OB-by-OB comparison showing agreement, ±1 and split grades, "saw it vs didn't see it", and "same grade, different reasons".</li>
+        <li><strong>Instructor lean and halo detection:</strong> who grades harsher or more leniently than the group or the lead's optional reference grade, and who gives the same grade to everything.</li>
+        <li><strong>Krippendorff's alpha</strong> for the exercise — one agreement score with clear good / tentative / poor bands.</li>
+        <li><strong>Fleet standards:</strong> the agreed standard for an OB is saved and shown to every instructor beside that OB when grading.</li>
+        <li><strong>Shadow grading:</strong> a standardisation lead grades a live session alongside the instructor, kept completely separate from the pilot's record.</li>
+        <li><strong>Calibration record</strong> per instructor, with CSV export.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/09-calibration-workshop.png" target="_blank" rel="noopener"><img src="screenshots/09-calibration-workshop.webp" width="1600" height="1000" loading="lazy" alt="Calibration workshop: five instructors' blind grades compared, with Krippendorff's alpha and each instructor's lean against the reference grade."></a><figcaption>Calibration workshop: five instructors' blind grades compared, with Krippendorff's alpha and each instructor's lean against the reference grade.</figcaption></figure>
+    </div>
+
+    <div class="group">
+      <h3>Training analytics <span class="tag">New</span></h3>
+      <ul>
+        <li>Headline figures: sessions, pilots, <strong>first-attempt pass rate</strong>, second attempts and items still failed.</li>
+        <li><strong>Competency trend</strong> by quarter and a <strong>pilots × competencies heat map</strong>.</li>
+        <li><strong>Exercises that fail most</strong>, and <strong>instructor grading spread</strong> against the group average.</li>
+        <li><strong>EASA training-need patterns</strong> (AMC1 ORO.FC.231(d)(1)(b)(3)): a competency graded 2 in consecutive EBT modules, or most competencies at 2 in one module.</li>
+        <li><strong>Recurrent obligations by pilot:</strong> every-OPC, 12-month and 36-month items and the major-failure cycle — overdue, due soon, and done.</li>
+        <li>Every table exports to CSV (opens in Excel).</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/08-analytics-instructor-spread-omd.png" target="_blank" rel="noopener"><img src="screenshots/08-analytics-instructor-spread-omd.webp" width="1600" height="1000" loading="lazy" alt="Exercises that fail most, instructor grading spread, and recurrent OM-D obligations by pilot."></a><figcaption>Exercises that fail most, instructor grading spread, and recurrent OM-D obligations by pilot.</figcaption></figure>
+    </div>
+
+    <div class="group">
+      <h3>Accounts and security</h3>
+      <ul>
+        <li><strong>Forgot password:</strong> reset by email, choose a new password, and other devices are signed out.</li>
+        <li><strong>Standardisation leads</strong> chosen by the Head of Training in Team.</li>
+        <li>Full pre-launch security review: new accounts have no access until activated, every table protected by row-level security, security headers on every page, all dependency warnings cleared.</li>
+      </ul>
+    </div>
+
+    <div class="group">
+      <h3>Public demo <span class="tag">New</span></h3>
+      <ul>
+        <li><strong>Try it at demo.simsynch.com</strong> — one click to enter as Instructor, Head of Training or Standardisation lead, and switch role at any time.</li>
+        <li>A fictional airline with a full year of sample training: 24 pilots, 60+ sessions, analytics, sign-offs and a calibration workshop. Resets every night.</li>
+      </ul>
+      <figure class="shot narrow"><a href="screenshots/01-demo-login.png" target="_blank" rel="noopener"><img src="screenshots/01-demo-login.webp" width="1080" height="1200" loading="lazy" alt="One click into the demo as any of three roles."></a><figcaption>One click into the demo as any of three roles.</figcaption></figure>
+    </div>
+
+    <div class="group">
+      <h3>Interface</h3>
+      <ul>
+        <li>Cleaner single-line tab bar; session details open from a chip in each tab, with an <strong>Incomplete</strong> badge when crew or date are missing.</li>
+        <li>Recurrent-obligation coverage shown on every LPC / OPC session, per pilot.</li>
+        <li>Inter-rater reliability analysis now uses the OB grades, exactly as the debrief does.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ── Version 15 ─────────────────────────────────────────────── -->
+  <section class="release">
+    <div class="ver">VERSION 15 · SEPTEMBER 2026</div>
+    <h2>Scenario builder, programmes and check rules</h2>
+    <p class="sub">Build the simulator session the way it is flown, and grade checks exactly by the operator's rules.</p>
+
+    <div class="group">
+      <h3>Scenario builder</h3>
+      <ul>
+        <li><strong>Per-exercise setup:</strong> start position (gate, threshold, final, airborne), weather, and <strong>failures with triggers</strong> — e.g. engine failure at V1 + 2 kt, or RVR dropping at 1000 ft.</li>
+        <li><strong>IOS capture points:</strong> a shared library of saved simulator positions per simulator, reused across sessions.</li>
+        <li><strong>Mission-path board:</strong> exercises shown as IOS console keys with status lamps, and colour-coded waypoints between them (reposition, capture point, freeze, weather change, arm failure, note).</li>
+        <li><strong>LVO check builder:</strong> creates the complete low-visibility check, fully set up, using the simulator's own malfunction list.</li>
+        <li>Printable <strong>IOS setup card</strong> for the session, and a <strong>run mode</strong> that remembers where you are.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/02-session-planner.png" target="_blank" rel="noopener"><img src="screenshots/02-session-planner.webp" width="1600" height="1000" loading="lazy" alt="The mission-path board: each exercise as an IOS key, with start position, weather and failure lamps."></a><figcaption>The mission-path board: each exercise as an IOS key, with start position, weather and failure lamps.</figcaption></figure>
+    </div>
+
+    <div class="group">
+      <h3>Season programmes and exercise selection</h3>
+      <ul>
+        <li><strong>Programme library:</strong> build the LPC / OPC programme once per season (Jan–Jun, Jul–Dec), publish it, and every instructor starts sessions from it.</li>
+        <li><strong>Exercise selection per pilot:</strong> mark exercises for both pilots, Captain only, First Officer only, or omitted (with a reason) — grading, debrief and sign-off all follow it.</li>
+        <li>LPC / OPC shown in the same flow format as the planner, with day markers.</li>
+      </ul>
+    </div>
+
+    <div class="group">
+      <h3>Grading by the operator's OM-D</h3>
+      <ul>
+        <li><strong>Captain (CM1) and First Officer (CM2) graded separately</strong>, with PF / PM recorded per exercise; shared exercises (e.g. UPRT) graded side by side.</li>
+        <li>OM-D grading scale and descriptions, and the <strong>LPC / OPC verdict</strong> counted by failed items.</li>
+        <li><strong>Second attempt</strong> on a failed item, <strong>competency caps</strong> after a failure, and <strong>required comments</strong> for grades 1, 2 and 5.</li>
+        <li>Printable <strong>ETR form</strong> per pilot.</li>
+        <li>OB grades always stay with the right behaviour, even when OBs are edited or regenerated.</li>
+        <li><strong>Team admin:</strong> manage instructors, roles and access from inside SimSynch.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/03-lpc-opc-grading.png" target="_blank" rel="noopener"><img src="screenshots/03-lpc-opc-grading.webp" width="1600" height="1000" loading="lazy" alt="LPC / OPC grading: Captain and First Officer graded separately, OB by OB, on the OM-D scale."></a><figcaption>LPC / OPC grading: Captain and First Officer graded separately, OB by OB, on the OM-D scale.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ── Version 14 ─────────────────────────────────────────────── -->
+  <section class="release">
+    <div class="ver">VERSION 14 · SEPTEMBER 2026</div>
+    <h2>Instructor accounts and per-pilot grading</h2>
+    <p class="sub">Every grade belongs to a pilot and an instructor — and can't be lost.</p>
+
+    <div class="group">
+      <h3>Accounts and records</h3>
+      <ul>
+        <li><strong>Instructor sign-in</strong> with roles: Instructor, Head of Training, Administrator.</li>
+        <li><strong>Per-pilot grading</strong> — each pilot has their own OB grades, competency profile and verdict.</li>
+        <li><strong>HOT sign-off</strong> recorded against the Head of Training's account; approved sessions are locked.</li>
+        <li><strong>Grade history:</strong> every change — who, when, old and new value — recorded automatically and impossible to edit.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/05-hot-sign-off.png" target="_blank" rel="noopener"><img src="screenshots/05-hot-sign-off.webp" width="1600" height="1000" loading="lazy" alt="HOT sign-off: per-pilot checks and verdicts, then approve or return with remarks."></a><figcaption>HOT sign-off: per-pilot checks and verdicts, then approve or return with remarks.</figcaption></figure>
+    </div>
+
+    <div class="group">
+      <h3>Grading workspace</h3>
+      <ul>
+        <li><strong>The OBs are the judgement:</strong> competency results come from the behaviours actually observed; unobserved OBs stay blank and never count against the pilot.</li>
+        <li>One <strong>overall grade per pilot</strong> for the whole session, kept separate from the competency grades.</li>
+        <li>One workspace for EBT and LPC / OPC: exercise list, day selector, progress per day, Prev / Next.</li>
+        <li><strong>Grades survive connection drops</strong> — saved on the device and sent when the connection returns, with live save status.</li>
+        <li><strong>Keyboard grading</strong> (1–5, Space, arrows), larger touch targets for tablets, and accessible contrast throughout.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/04-debrief-competency-profile.png" target="_blank" rel="noopener"><img src="screenshots/04-debrief-competency-profile.webp" width="1600" height="1000" loading="lazy" alt="The debrief: competency profile built only from the behaviours actually observed."></a><figcaption>The debrief: competency profile built only from the behaviours actually observed.</figcaption></figure>
+    </div>
+  </section>
+
+  <!-- ── Versions 12–13 ─────────────────────────────────────────── -->
+  <section class="release">
+    <div class="ver">VERSIONS 12–13 · SEPTEMBER 2026</div>
+    <h2>Session planning foundations</h2>
+    <p class="sub">The planner, the libraries and the sign-off workflow.</p>
+
+    <div class="group">
+      <h3>Planning</h3>
+      <ul>
+        <li><strong>Session types:</strong> LPC / OPC, LOFT, EBT module, FODP, LVO check, TRI / TRE, type rating and custom, each with its own structure.</li>
+        <li><strong>Generate a session plan</strong> from the scenario bank by phase, difficulty and role — pin the scenarios you like and reroll the rest; EASA structure checks before you build.</li>
+        <li><strong>Scenario library</strong> ranked by the competencies the session still lacks.</li>
+        <li><strong>Malfunction library</strong> with causes, consequences and related MEL items; every exercise arrives with its Observable Behaviours attached.</li>
+        <li><strong>LPC / OPC from a PDF programme:</strong> upload, select exercises, grade — with days, roles and mandatory items read from the document.</li>
+      </ul>
+    </div>
+
+    <div class="group">
+      <h3>Sign-off and records</h3>
+      <ul>
+        <li><strong>Head of Training sign-off</strong> with approve / return and remarks; returned sessions come back for correction.</li>
+        <li><strong>Pilot records</strong>, <strong>session history</strong> and <strong>inter-rater reliability</strong> analysis.</li>
+      </ul>
+      <figure class="shot"><a href="screenshots/06-pilot-record-ebt-need.png" target="_blank" rel="noopener"><img src="screenshots/06-pilot-record-ebt-need.webp" width="1600" height="1000" loading="lazy" alt="A pilot record with competency trends, 12-month exposure and an EASA training-need flag."></a><figcaption>A pilot record with competency trends, 12-month exposure and an EASA training-need flag.</figcaption></figure>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 SimSynch™ · Shawn Abela · All rights reserved</span>
+    <span><a href="https://demo.simsynch.com">demo.simsynch.com</a></span>
+  </footer>
+</div>
+</body>
+</html>
